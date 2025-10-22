@@ -8,125 +8,173 @@
   <meta name="author" content="Reshen San">
   <title>Sri Lanka’s 1st Iron Man Jarvis AI — Created by Reshen San</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle at center, #00111a 0%, #000 90%);
-      color: #00ffff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-    }
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(circle at center, #00111a 0%, #000 90%);
+  color: #00ffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
 
-    /* Glass blur box */
-    .glass-box {
-      background: rgba(0, 255, 255, 0.05);
-      border: 1px solid rgba(0, 255, 255, 0.2);
-      border-radius: 20px;
-      padding: 40px;
-      width: 85%;
-      max-width: 700px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
-      text-align: center;
-      animation: fadeIn 1.5s ease-out;
-    }
+/* Glass blur box */
+.glass-box {
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  width: 85%;
+  max-width: 700px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+  text-align: center;
+  animation: fadeIn 1.5s ease-out;
+  margin-top: 100px;
+}
 
-    h1 {
-      font-size: 2.4em;
-      color: #00ffff;
-      text-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
-    }
+h1 {
+  font-size: 2.4em;
+  color: #00ffff;
+  text-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
 
-    h2 {
-      font-size: 1.2em;
-      color: #99ffff;
-      margin-top: 10px;
-      letter-spacing: 1px;
-    }
+h2 {
+  font-size: 1.2em;
+  color: #99ffff;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
 
-    p {
-      margin-top: 20px;
-      color: #ccffff;
-      font-size: 1em;
-      line-height: 1.7em;
-      text-shadow: 0 0 5px rgba(0,255,255,0.4);
-    }
+p {
+  margin-top: 20px;
+  color: #ccffff;
+  font-size: 1em;
+  line-height: 1.7em;
+  text-shadow: 0 0 5px rgba(0,255,255,0.4);
+}
 
-    a {
-      color: #00ffff;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+a {
+  color: #00ffff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
 
-    a:hover {
-      color: #ffffff;
-      text-shadow: 0 0 10px #ffffff;
-    }
+a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffff;
+}
 
-    footer {
-      position: absolute;
-      bottom: 0px;
-      text-align: center;
-      font-size: 0.85em;
-      color: #66ffff;
-      opacity: 0.7;
-    }
+/* Footer now at bottom naturally */
+footer {
+  text-align: center;
+  font-size: 0.85em;
+  color: #66ffff;
+  opacity: 0.7;
+  margin: 60px 0 20px 0;
+}
 
-    /* Subtle animation background lines */
-    .lines {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
+/* Subtle animation background lines */
+.lines {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 
-    .lines span {
-      position: absolute;
-      display: block;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(180deg, transparent, rgba(0,255,255,0.3), transparent);
-      animation: move 5s linear infinite;
-    }
+.lines span {
+  position: absolute;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(0,255,255,0.3), transparent);
+  animation: move 5s linear infinite;
+}
 
-    .lines span:nth-child(1) {
-      left: 10%;
-      animation-delay: 0s;
-    }
-    .lines span:nth-child(2) {
-      left: 40%;
-      animation-delay: 2s;
-    }
-    .lines span:nth-child(3) {
-      left: 70%;
-      animation-delay: 4s;
-    }
+.lines span:nth-child(1) { left: 10%; animation-delay: 0s; }
+.lines span:nth-child(2) { left: 40%; animation-delay: 2s; }
+.lines span:nth-child(3) { left: 70%; animation-delay: 4s; }
 
-    @keyframes move {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100%); }
-    }
+@keyframes move {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* About section box */
+.about-section {
+  margin-top: 60px;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  color: #ccffff;
+  font-size: 0.95em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  animation: fadeInUp 1.5s ease-out;
+  text-shadow: 0 0 8px rgba(0,255,255,0.3);
+}
+
+.about-section h3 {
+  font-size: 1.5em;
+  color: #00ffff;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(0,255,255,0.5);
+}
+
+.about-section a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffff;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Reshen San",
+  "nationality": "Sri Lankan",
+  "jobTitle": "Software Developer & AI Creator",
+  "url": "https://reshen2008.github.io/",
+  "sameAs": [
+    "https://youtube.com/@reshensan",
+    "https://medium.com/@reshensan",
+    "https://www.facebook.com/yourprofilelink"
+  ],
+  "knowsAbout": ["Jarvis AI", "Artificial Intelligence", "Voice Assistant"],
+  "description": "Reshen San created Sri Lanka's first Iron Man Jarvis AI project in 2025, combining futuristic design and intelligent automation."
+}
+</script>
+
 </head>
 <body>
   <div class="lines">
@@ -151,7 +199,22 @@
       <a href="https://youtube.com/@reshensan?si=udn3tNqC1Db30U0K" target="_blank">YouTube</a> 🔗
     </p>
   </div>
+  
+<section class="about-section">
+    <h3>About This Project</h3>
+  <p>
+    The <strong>Jarvis AI Project</strong> is the first Iron Man-inspired artificial intelligence system developed in Sri Lanka by 
+    <strong>Reshen San</strong> in 2025. It includes smart voice recognition, automation, and digital assistance features, built with modern web technologies.
+  </p>
+  <p>
+    Learn more at <a href="https://reshen2008.github.io/" target="_blank">Reshen2008.github.io</a> or follow on 
+    <a href="https://youtube.com/@reshensan" target="_blank">YouTube</a> and 
+    <a href="https://medium.com/@reshensansatha/sri-lankas-first-iron-man-jarvis-created-by-reshen-san-2025-e9179bc7c3c8" target="_blank">Medium</a>.
+  </p>
+</section>
 
   <footer>© 2025 Reshen San | Sri Lanka’s First Iron Man Jarvis Project</footer>
+
+
 </body>
 </html>
